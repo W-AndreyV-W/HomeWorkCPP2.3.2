@@ -4,9 +4,8 @@
 class Counter {
 public:
     std::string sign;
-    int firstnum = 0;
     void first();
-    bool end();
+    bool operation();
     void plus();
     void minus();
     void print();
@@ -16,13 +15,23 @@ private:
 
 void Counter::first() {
     if (sign == "да") {
+        int firstnum = 0;
         std::cout << "Введите начальное значение счётчика: ";
         std::cin >> firstnum;
         num = firstnum;
     }
 }
 
-bool Counter::end() {
+bool Counter::operation() {
+    if (sign == "+") {
+        plus();
+    }
+    if (sign == "-") {
+        minus();
+    }
+    if (sign == "=") {
+        print();
+    }
     if (sign == "х") {
         return false;
     } else {
@@ -31,21 +40,15 @@ bool Counter::end() {
 }
 
 void Counter::plus() {
-    if (sign == "+") {
-        num++;
-    }
+    num++;
 }
 
 void Counter::minus() {
-    if (sign == "-") {
-        num--;
-    }
+    num--;
 }
 
 void Counter::print() {
-    if (sign == "=") {
-        std::cout << num << std::endl;
-    }
+    std::cout << num << std::endl;
 }
 
 int main()
@@ -59,8 +62,5 @@ int main()
     do {
         std::cout << "Введите команду ('+', '-', '=' или 'x'): ";
         std::cin >> signs.sign;
-        signs.plus();
-        signs.minus();
-        signs.print();
-    } while (signs.end());
+    } while (signs.operation());
 }
